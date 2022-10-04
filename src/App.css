@@ -1,5 +1,36 @@
 .container {
-    border: 1px solid black;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+}
+
+.flex {
+  display: flex;
+}
+
+.flexDirCol {
+  flex-direction: column;
+}
+
+.flexDirRow {
+  flex-direction: row;
+}
+
+.justConCenter {
+  justify-content: center;
+}
+
+.justConAround {
+  justify-content: space-around;
+}
+
+.alignItems {
+  align-items: center;
+}
+
+
+.Grid-container {
     display: grid;
     grid-template-columns: repeat(5, 10vw);
     grid-template-rows: repeat(5, 10vw);

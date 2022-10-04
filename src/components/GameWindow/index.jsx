@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { CirclePicker } from 'react-color';
+import { Button } from '@mui/material';
 import BoardBlocks from './components/BoardBlocks';
+import Dices from './components/Dices';
 
 const MonopolyBoard = () => {
   const [diceNumber1, setDiceNumber1] = useState(0);
+
   const [diceNumber2, setDiceNumber2] = useState(0);
+
   const [playerPosition, setPlayerPosition] = useState(1);
+
+  const [color, setColor] = useState('#FFFFFF');
+
+  const [showColor, setShowColor] = useState(false);
 
     const BoardMap = [
     1, 2, 3, 4, 5,
@@ -34,9 +43,14 @@ const MonopolyBoard = () => {
     }
   }, [diceNumber1, diceNumber2]);
 
+  const ActivateColor = (ChosenColor) => {
+    setColor(ChosenColor);
+  };
+
   return (
     <div className="container">
-      {
+      <div className="Grid-container">
+        {
         BoardMap.map((singleBlock) => {
           if (singleBlock >= 1) {
               return (
@@ -44,6 +58,7 @@ const MonopolyBoard = () => {
                   key={singleBlock}
                   position={singleBlock}
                   stationedPosition={playerPosition}
+                  color={showColor && color}
                 />
               );
             }
@@ -52,12 +67,19 @@ const MonopolyBoard = () => {
           );
         })
       }
-      <div>
-        <button onClick={() => RollTheDice()}>
-          Roll The Dice
-        </button>
-        <span className={`dice dice-${diceNumber1}`} />
-        <span className={`dice dice-${diceNumber2}`} />
+      </div>
+      <div className="flex flexDirCol alignItems justConAround">
+        <Dices
+          RollDice={() => RollTheDice()}
+          DiceNum1={diceNumber1}
+          DiceNum2={diceNumber2}
+          isActive={showColor}
+        />
+        <CirclePicker color={color} onChange={(NewColor) => ActivateColor(NewColor.hex)} />
+        <Button onClick={() => setShowColor(!showColor)}>
+          Start Game
+        </Button>
+
       </div>
     </div>
   );

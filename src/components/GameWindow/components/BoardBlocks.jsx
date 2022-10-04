@@ -1,10 +1,10 @@
 import React from 'react';
 
-const BoardBlocks = ({ position, stationedPosition }) => {
+const BoardBlocks = ({ position, stationedPosition, color }) => {
     let test = 'white';
 
     if (position === stationedPosition) {
-       test = 'lightblue';
+       test = color;
     }
 
     return (
